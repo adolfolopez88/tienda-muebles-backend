@@ -18,23 +18,23 @@ El proyecto `tienda-muebles-backend` necesita una base sólida antes de implemen
 
 ### Fase 1: API Base
 
-- [ ] **AC-1:** Proyecto compila con `dotnet build` sin errores ni warnings
-- [ ] **AC-2:** Estructura de 4 capas: Api, Application, Domain, Infrastructure
-- [ ] **AC-3:** Swagger disponible en `/swagger` con documentación de endpoints
-- [ ] **AC-4:** DbContext configurado con SQL Server y cadena de conexión en `appsettings.json`
-- [ ] **AC-5:** Migración inicial ejecutable con `dotnet ef migrations add InitialCreate`
-- [ ] **AC-6:** Health check endpoint `GET /health` devuelve 200
+- [x] **AC-1:** Proyecto compila con `dotnet build` sin errores ni warnings
+- [x] **AC-2:** Estructura de 4 capas: Api, Application, Domain, Infrastructure
+- [x] **AC-3:** Swagger disponible en `/swagger` con documentación de endpoints
+- [x] **AC-4:** DbContext configurado con SQL Server y cadena de conexión en `appsettings.json`
+- [x] **AC-5:** Migración inicial ejecutable con `dotnet ef migrations add InitialCreate`
+- [x] **AC-6:** Health check endpoint `GET /health` devuelve 200
 
 ### Fase 2: Autenticación
 
-- [ ] **AC-7:** `POST /api/auth/register` — crea usuario, devuelve JWT + refresh token
-- [ ] **AC-8:** `POST /api/auth/login` — valida credenciales, devuelve JWT + refresh token
-- [ ] **AC-9:** `POST /api/auth/refresh` — recibe refresh token, devuelve nuevo JWT + rota refresh
-- [ ] **AC-10:** `GET /api/auth/me` — protegido con `[Authorize]`, devuelve datos del usuario autenticado
-- [ ] **AC-11:** Passwords hasheados con BCrypt (nunca en texto plano)
-- [ ] **AC-12:** Roles Admin y Customer implementados, `[Authorize(Roles = "Admin")]` funcional
-- [ ] **AC-13:** Refresh tokens almacenados en DB con expiración de 7 días
-- [ ] **AC-14:** JWT expira en 15 minutos, configurable en `appsettings.json`
+- [x] **AC-7:** `POST /api/auth/register` — crea usuario, devuelve JWT + refresh token
+- [x] **AC-8:** `POST /api/auth/login` — valida credenciales, devuelve JWT + refresh token
+- [x] **AC-9:** `POST /api/auth/refresh` — recibe refresh token, devuelve nuevo JWT + rota refresh
+- [x] **AC-10:** `GET /api/auth/me` — protegido con `[Authorize]`, devuelve datos del usuario autenticado
+- [x] **AC-11:** Passwords hasheados con BCrypt (nunca en texto plano)
+- [x] **AC-12:** Roles Admin y Customer implementados, `[Authorize(Roles = "Admin")]` funcional
+- [x] **AC-13:** Refresh tokens almacenados en DB con expiración de 7 días
+- [x] **AC-14:** JWT expira en 15 minutos, configurable en `appsettings.json`
 
 ## Tareas Técnicas
 
@@ -66,23 +66,27 @@ El proyecto `tienda-muebles-backend` necesita una base sólida antes de implemen
 
 | AC | Descripción | Estado | Fecha |
 |----|------------|--------|-------|
-| AC-1 | Build sin errores | ⏳ | — |
-| AC-2 | 4 capas Clean Architecture | ⏳ | — |
-| AC-3 | Swagger /swagger | ⏳ | — |
-| AC-4 | DbContext SQL Server | ⏳ | — |
-| AC-5 | Migración inicial | ⏳ | — |
-| AC-6 | Health check /health | ⏳ | — |
-| AC-7 | POST /api/auth/register | ⏳ | — |
-| AC-8 | POST /api/auth/login | ⏳ | — |
-| AC-9 | POST /api/auth/refresh | ⏳ | — |
-| AC-10 | GET /api/auth/me | ⏳ | — |
-| AC-11 | Passwords BCrypt | ⏳ | — |
-| AC-12 | Roles Admin + Customer | ⏳ | — |
-| AC-13 | Refresh tokens en DB | ⏳ | — |
-| AC-14 | JWT 15min configurable | ⏳ | — |
+| AC-1 | Build sin errores | ✅ | 2026-05-15 |
+| AC-2 | 4 capas Clean Architecture | ✅ | 2026-05-15 |
+| AC-3 | Swagger /swagger | ✅ | 2026-05-15 |
+| AC-4 | DbContext SQL Server | ✅ | 2026-05-15 |
+| AC-5 | Migración inicial | ✅ | 2026-05-15 |
+| AC-6 | Health check /health | ✅ | 2026-05-15 |
+| AC-7 | POST /api/auth/register | ✅ | 2026-05-15 |
+| AC-8 | POST /api/auth/login | ✅ | 2026-05-15 |
+| AC-9 | POST /api/auth/refresh | ✅ | 2026-05-15 |
+| AC-10 | GET /api/auth/me | ✅ | 2026-05-15 |
+| AC-11 | Passwords BCrypt | ✅ | 2026-05-15 |
+| AC-12 | Roles Admin + Customer | ✅ | 2026-05-15 |
+| AC-13 | Refresh tokens en DB | ✅ | 2026-05-15 |
+| AC-14 | JWT 15min configurable | ✅ | 2026-05-15 |
 
 ## Bitácora
 
 | Fecha | Evento |
 |-------|--------|
 | 2026-05-15 | Spec creada. Fase 1: API Base. Fase 2: Auth JWT. 14 ACs pendientes.
+| 2026-05-15 | Fase 1 completa: scaffold, domain, application, infrastructure, Program.cs, HealthController, Swagger |
+| 2026-05-15 | Fase 2 completa: AuthService, AuthController, JWT middleware, 8 tests unitarios pasando |
+| 2026-05-15 | Seed admin creado (admin@tiendamuebles.com). Migraciones: InitialCreate + SeedAdminUser |
+| 2026-05-15 | Build exitoso. dotnet test: 8 passed, 0 failed. API funcional en localhost:5000 |
