@@ -28,5 +28,14 @@ public class AppDbContext : DbContext
                   .OnDelete(DeleteBehavior.Cascade);
             entity.HasIndex(rt => rt.Token).IsUnique();
         });
+
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = Guid.Parse("a1b2c3d4-e5f6-7890-abcd-ef1234567890"),
+            Email = "admin@tiendamuebles.com",
+            PasswordHash = "$2a$12$sbwJNiELotlcqbpeF/gVgebq9SIRnIWdZlybAk2Sd6i8wYXqtl.9G",
+            Role = TiendaMuebles.Domain.Enums.UserRole.Admin,
+            CreatedAt = new DateTime(2026, 5, 15, 0, 0, 0, DateTimeKind.Utc)
+        });
     }
 }
