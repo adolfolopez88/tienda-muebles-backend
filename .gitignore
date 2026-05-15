@@ -1,0 +1,32 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+## Visual Studio
+.vs/
+*.dbmdl
+*.jfm
+*.dotCover
+_ReSharper.Caches/
+*.ncrunchsolution
+*.ncrunchproject
+
+## VS Code
+.vscode/
+
+## JetBrains Rider
+.idea/
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Environment
+.env
+*.env.local
+appsettings.*.local.json
