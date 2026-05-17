@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using TiendaMuebles.Infrastructure.Data;
 
 namespace TiendaMuebles.Infrastructure.Data;
 
@@ -9,7 +8,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     public AppDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-        optionsBuilder.UseSqlServer("Server=localhost;Database=TiendaMuebles;Trusted_Connection=True;TrustServerCertificate=True");
+        optionsBuilder.UseNpgsql("Host=localhost;Database=tienda_muebles;Username=tienda_muebles_user;Password=tienda_muebles_user");
         return new AppDbContext(optionsBuilder.Options);
     }
 }
