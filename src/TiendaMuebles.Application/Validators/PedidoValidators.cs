@@ -23,12 +23,14 @@ public class CreatePedidoValidator : AbstractValidator<CreatePedidoRequest>
 
 public class UpdateEstadoValidator : AbstractValidator<UpdateEstadoRequest>
 {
-    private static readonly string[] ValidStates =
-        { "Pendiente", "Procesando", "Enviado", "Entregado", "Cancelado" };
+    private static readonly HashSet<string> ValidStates = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "Pendiente", "Procesando", "Enviado", "Entregado", "Cancelado"
+    };
 
     public UpdateEstadoValidator()
     {
         RuleFor(x => x.Estado).NotEmpty().Must(s => ValidStates.Contains(s))
-            .WithMessage($"Estado debe ser: {string.Join(", ", ValidStates)}");
+            .WithMessage($"Estado debe ser: Pendiente, Procesando, Enviado, Entregado, Cancelado");
     }
 }
