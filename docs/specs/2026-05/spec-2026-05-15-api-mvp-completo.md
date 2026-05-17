@@ -1,6 +1,6 @@
 ---
 type: spec
-status: draft
+status: completed
 date: 2026-05-15
 proyecto: tienda-muebles-backend
 area: backend
@@ -19,7 +19,7 @@ tags:
 > [!INFO] Especificacion SDD
 > **Proyecto**: tienda-muebles-backend
 > **Stack**: .NET 10 + EF Core + SQL Server
-> **Estado**: Draft -> En progreso -> Completado
+> **Estado**: Completado
 > **Extiende**: spec-2026-05-15-api-base-auth (auth base ya construida)
 
 ---
@@ -63,7 +63,7 @@ Extender el backend .NET existente (solo auth) para convertirlo en el API comple
 - Categoria.cs: Guid Id, string Nombre, string Slug (unique), int Orden
 - ImagenProducto.cs: Guid Id, Guid ProductoId, string Url (Cloudinary), string? Alt, int Orden
 - Pedido.cs: Guid Id, string Numero (MN-XXXXX unique), Guid? ClienteId (nullable), string Email, EstadoPedido Estado, string MetodoPago, decimal Subtotal, ICollection<ItemPedido> Items (owned), DatosEnvio DatosEnvio (owned)
-- EstadoPedido enum: Pendiente=0, Procesando=1, Enviado=2, Entregado=3, Cancelado=4
+- EstadoPedido enum: Completado=0, Procesando=1, Enviado=2, Entregado=3, Cancelado=4
 
 ### Decisiones de diseno
 - Producto.CategoriaSlug es FK a Categoria.Slug -- URLs limpias con integridad referencial
@@ -179,112 +179,112 @@ Rate Limiting -> CORS -> JWT Auth -> FluentValidation -> Controller -> Service -
 ## 8. Criterios de Aceptacion
 
 ### AC-01 -- Catalogo publico
-- [ ] AC-01.1: GET /api/productos devuelve productos activos paginados (12 por pagina)
-- [ ] AC-01.2: GET /api/productos?categoria=sala filtra por categoria
-- [ ] AC-01.3: GET /api/productos/destacados productos con badge y stock > 0
-- [ ] AC-01.4: GET /api/productos/{slug} detalle con imagenes
+- [ ] [x] AC-01.1: GET /api/productos devuelve productos activos paginados (12 por pagina)
+- [ ] [x] AC-01.2: GET /api/productos?categoria=sala filtra por categoria
+- [ ] [x] AC-01.3: GET /api/productos/destacados productos con badge y stock > 0
+- [ ] [x] AC-01.4: GET /api/productos/{slug} detalle con imagenes
 
 ### AC-02 -- Categorias
-- [ ] AC-02.1: GET /api/categorias lista ordenada por Orden
+- [ ] [x] AC-02.1: GET /api/categorias lista ordenada por Orden
 
 ### AC-03 -- Gestion admin productos
-- [ ] AC-03.1: POST /api/productos crea producto (admin only)
-- [ ] AC-03.2: PUT /api/productos/{slug} actualiza producto
-- [ ] AC-03.3: PATCH /api/productos/{slug}/toggle activa/desactiva
-- [ ] AC-03.4: DELETE /api/productos/{slug} soft-delete
-- [ ] AC-03.5: 401 sin JWT, 403 con JWT cliente
+- [ ] [x] AC-03.1: POST /api/productos crea producto (admin only)
+- [ ] [x] AC-03.2: PUT /api/productos/{slug} actualiza producto
+- [ ] [x] AC-03.3: PATCH /api/productos/{slug}/toggle activa/desactiva
+- [ ] [x] AC-03.4: DELETE /api/productos/{slug} soft-delete
+- [ ] [x] AC-03.5: 401 sin JWT, 403 con JWT cliente
 
 ### AC-04 -- Upload imagenes
-- [ ] AC-04.1: POST /api/imagenes/upload multipart -> Cloudinary -> URL
-- [ ] AC-04.2: DELETE /api/imagenes/{id} elimina imagen
-- [ ] AC-04.3: Archivos > 5MB rechazados con 422
+- [ ] [x] AC-04.1: POST /api/imagenes/upload multipart -> Cloudinary -> URL
+- [ ] [x] AC-04.2: DELETE /api/imagenes/{id} elimina imagen
+- [ ] [x] AC-04.3: Archivos > 5MB rechazados con 422
 
 ### AC-05 -- Pedidos
-- [ ] AC-05.1: POST /api/pedidos crea pedido con items, envio
-- [ ] AC-05.2: Numero orden unico MN-XXXXX
-- [ ] AC-05.3: GET /api/pedidos/{numero} consulta publica
-- [ ] AC-05.4: GET /api/pedidos admin paginado con filtro
-- [ ] AC-05.5: PATCH /api/pedidos/{numero}/estado admin
+- [ ] [x] AC-05.1: POST /api/pedidos crea pedido con items, envio
+- [ ] [x] AC-05.2: Numero orden unico MN-XXXXX
+- [ ] [x] AC-05.3: GET /api/pedidos/{numero} consulta publica
+- [ ] [x] AC-05.4: GET /api/pedidos admin paginado con filtro
+- [ ] [x] AC-05.5: PATCH /api/pedidos/{numero}/estado admin
 
 ### AC-06 -- Pagos
-- [ ] AC-06.1: POST /api/pagos/create-intent -> clientSecret
-- [ ] AC-06.2: Webhook recibe evento y actualiza pedido
-- [ ] AC-06.3: Webhook verifica firma Stripe-Signature
+- [ ] [x] AC-06.1: POST /api/pagos/create-intent -> clientSecret
+- [ ] [x] AC-06.2: Webhook recibe evento y actualiza pedido
+- [ ] [x] AC-06.3: Webhook verifica firma Stripe-Signature
 
 ### AC-07 -- Emails
-- [ ] AC-07.1: Pedido creado -> email confirmacion
-- [ ] AC-07.2: Email contiene numero orden, resumen, total
+- [ ] [x] AC-07.1: Pedido creado -> email confirmacion
+- [ ] [x] AC-07.2: Email contiene numero orden, resumen, total
 
 ### AC-08 -- Seed
-- [ ] AC-08.1: POST /api/seed admin only
-- [ ] AC-08.2: Crea 4 categorias, 8 productos, 1 admin
+- [ ] [x] AC-08.1: POST /api/seed admin only
+- [ ] [x] AC-08.2: Crea 4 categorias, 8 productos, 1 admin
 
 ### AC-09 -- Validacion
-- [ ] AC-09.1: DTOs invalidos -> 422 con detalles
-- [ ] AC-09.2: Errores 500 -> Problem Details (RFC 7807)
+- [ ] [x] AC-09.1: DTOs invalidos -> 422 con detalles
+- [ ] [x] AC-09.2: Errores 500 -> Problem Details (RFC 7807)
 
 ### AC-10 -- Seguridad
-- [ ] AC-10.1: Admin endpoints requieren rol Admin
-- [ ] AC-10.2: JWT Secret configurable sin fallback hardcodeado
-- [ ] AC-10.3: Rate limiting 100 req/15min
-- [ ] AC-10.4: CORS restringido a FRONTEND_URL
+- [ ] [x] AC-10.1: Admin endpoints requieren rol Admin
+- [ ] [x] AC-10.2: JWT Secret configurable sin fallback hardcodeado
+- [ ] [x] AC-10.3: Rate limiting 100 req/15min
+- [ ] [x] AC-10.4: CORS restringido a FRONTEND_URL
 
 ### AC-11 -- Sincronizacion frontend
-- [ ] AC-11.1: Frontend MAISON NOIR consume este API
-- [ ] AC-11.2: Endpoints frontend compatibles con .NET
+- [ ] [x] AC-11.1: Frontend MAISON NOIR consume este API
+- [ ] [x] AC-11.2: Endpoints frontend compatibles con .NET
 ---
 
 ## 9. Tareas de implementacion
 
 ### Fase 1 -- Productos y Categorias
-- [ ] T-01: Entidades Producto, Categoria, ImagenProducto en Domain
-- [ ] T-02: DTOs en Application
-- [ ] T-03: Interfaces de servicio (IProductoService, ICategoriaService)
-- [ ] T-04: Implementar servicios en Infrastructure
-- [ ] T-05: Controladores ProductosController, CategoriasController
-- [ ] T-06: Migracion EF Core para nuevas tablas
-- [ ] T-07: Endpoint seed con datos iniciales
-- [ ] T-08: Tests unitarios
+- [x] T-01: Entidades Producto, Categoria, ImagenProducto en Domain
+- [x] T-02: DTOs en Application
+- [x] T-03: Interfaces de servicio (IProductoService, ICategoriaService)
+- [x] T-04: Implementar servicios en Infrastructure
+- [x] T-05: Controladores ProductosController, CategoriasController
+- [x] T-06: Migracion EF Core para nuevas tablas
+- [x] T-07: Endpoint seed con datos iniciales
+- [x] T-08: Tests unitarios
 
 ### Fase 2 -- Pedidos
-- [ ] T-09: Entidades Pedido, ItemPedido, DatosEnvio, EstadoPedido
-- [ ] T-10: DTOs de pedido
-- [ ] T-11: Servicio pedidos + generador MN-XXXXX
-- [ ] T-12: PedidosController
-- [ ] T-13: Migracion Pedidos
-- [ ] T-14: Tests unitarios
+- [x] T-09: Entidades Pedido, ItemPedido, DatosEnvio, EstadoPedido
+- [x] T-10: DTOs de pedido
+- [x] T-11: Servicio pedidos + generador MN-XXXXX
+- [x] T-12: PedidosController
+- [x] T-13: Migracion Pedidos
+- [x] T-14: Tests unitarios
 
 ### Fase 3 -- Imagenes
-- [ ] T-15: IImageStorageService + Cloudinary impl
-- [ ] T-16: ImagenesController
-- [ ] T-17: Tests unitarios
+- [x] T-15: IImageStorageService + Cloudinary impl
+- [x] T-16: ImagenesController
+- [x] T-17: Tests unitarios
 
 ### Fase 4 -- Pagos y Emails
-- [ ] T-18: IPaymentService + Stripe impl
-- [ ] T-19: PagosController
-- [ ] T-20: IEmailService + Resend impl
-- [ ] T-21: Disparo emails en pedido
-- [ ] T-22: Tests unitarios
+- [x] T-18: IPaymentService + Stripe impl
+- [x] T-19: PagosController
+- [x] T-20: IEmailService + Resend impl
+- [x] T-21: Disparo emails en pedido
+- [x] T-22: Tests unitarios
 
 ### Fase 5 -- Infraestructura
-- [ ] T-23: FluentValidation en todos los DTOs
-- [ ] T-24: Problem Details middleware global
-- [ ] T-25: Paginacion helper
-- [ ] T-26: Rate limiting + CORS revision
-- [ ] T-27: Tests integracion (WebApplicationFactory)
-- [ ] T-28: Actualizar docker-compose
+- [x] T-23: FluentValidation en todos los DTOs
+- [x] T-24: Problem Details middleware global
+- [x] T-25: Paginacion helper
+- [x] T-26: Rate limiting + CORS revision
+- [x] T-27: Tests integracion (WebApplicationFactory)
+- [x] T-28: Actualizar docker-compose
 ---
 
 ## 10. Tabla de Progreso
 
 | Fase | Tareas | Estado | Fecha |
 |------|--------|--------|-------|
-| 1. Productos y Categorias | T-01 a T-08 | Pendiente | -- |
-| 2. Pedidos | T-09 a T-14 | Pendiente | -- |
-| 3. Imagenes | T-15 a T-17 | Pendiente | -- |
-| 4. Pagos y Emails | T-18 a T-22 | Pendiente | -- |
-| 5. Infraestructura | T-23 a T-28 | Pendiente | -- |
-| **Total** | **28 tareas** | **0%** | |
+| 1. Productos y Categorias | T-01 a T-08 | Completado | -- |
+| 2. Pedidos | T-09 a T-14 | Completado | -- |
+| 3. Imagenes | T-15 a T-17 | Completado | -- |
+| 4. Pagos y Emails | T-18 a T-22 | Completado | -- |
+| 5. Infraestructura | T-23 a T-28 | Completado | -- |
+| **Total** | **28 tareas** | **100%** | |
 
 ---
 
@@ -292,4 +292,5 @@ Rate Limiting -> CORS -> JWT Auth -> FluentValidation -> Controller -> Service -
 
 | Fecha | Evento |
 |-------|--------|
-| 2026-05-15 | Spec creada. Analisis de codigo base (.NET + Node.js HomeVision). Diseno aprobado (Clean Architecture extendida). |
+| 2026-05-15 | Spec creada.
+| 2026-05-17 | Fases 1-5 completadas. PostgreSQL migrado. 22 endpoints. 27 tests. Build 0/0.. Analisis de codigo base (.NET + Node.js HomeVision). Diseno aprobado (Clean Architecture extendida). |
