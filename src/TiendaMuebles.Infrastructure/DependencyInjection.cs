@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddScoped<IProductoService, ProductoService>();
         services.AddScoped<ICategoriaService, CategoriaService>();
         services.AddScoped<IPedidoService, PedidoService>();
+        services.AddScoped<IImageStorageService, LocalImageStorageService>();
 
         return services;
     }
