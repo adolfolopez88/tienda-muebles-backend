@@ -24,6 +24,8 @@ public static class DependencyInjection
         services.AddScoped<ICategoriaService, CategoriaService>();
         services.AddScoped<IPedidoService, PedidoService>();
         services.AddScoped<IImageStorageService, LocalImageStorageService>();
+        services.AddScoped<IPaymentService, SimulatedPaymentService>();
+        services.AddScoped<IEmailService, LoggingEmailService>();
 
         return services;
     }

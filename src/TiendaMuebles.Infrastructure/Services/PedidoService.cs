@@ -10,8 +10,13 @@ namespace TiendaMuebles.Infrastructure.Services;
 public class PedidoService : IPedidoService
 {
     private readonly AppDbContext _db;
+    private readonly IEmailService _email;
 
-    public PedidoService(AppDbContext db) => _db = db;
+    public PedidoService(AppDbContext db, IEmailService email)
+    {
+        _db = db;
+        _email = email;
+    }
 
     public async Task<PedidoResponse> CreateAsync(CreatePedidoRequest r)
     {
@@ -48,6 +53,11 @@ public class PedidoService : IPedidoService
 
         _db.Pedidos.Add(pedido);
         await _db.SaveChangesAsync();
+
+        // Disparar email de confirmacion (no bloqueante)
+        _ = _email.SendOrderConfirmationAsync(
+            pedido.Email, pedido.Numero, pedido.Subtotal, pedido.Items.Count);
+
         return Map(pedido);
     }
 
@@ -99,6 +109,10 @@ public class PedidoService : IPedidoService
         p.Estado = nuevoEstado;
         p.UpdatedAt = DateTime.UtcNow;
         await _db.SaveChangesAsync();
+
+        if (nuevoEstado == EstadoPedido.Enviado)
+            _ = _email.SendShippingNotificationAsync(p.Email, p.Numero);
+
         return Map(p);
     }
 
